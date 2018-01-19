@@ -8,6 +8,7 @@
 #summary {
     text-align: left;
     margin-left: 20px;
+    font-size: 15px;
 }
 
 #main {
@@ -16,6 +17,8 @@
 
 #reviews {
     font-style: italic;
+    margin-left: 40px;
+    text-align: left;
 }
 
 .card {
