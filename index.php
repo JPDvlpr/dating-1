@@ -1,4 +1,10 @@
 <?php
+/*
+ * Zachary Rosenlund
+ * 1/19/18
+ * index.pjp
+ * This starts fat-free and sets the routes for my dating website
+ */
 //Require the autoload file
 require_once('vendor/autoload.php');
 
