@@ -1,0 +1,25 @@
+.card-img-bottom {
+    height: 100%;
+    padding: 20px 0;
+    background: url("http://thepixelpedia.com/wp-content/uploads/2017/04/best-free-dating-apps.jpg") center no-repeat;
+    background-size: cover;
+}
+
+#summary {
+    text-align: left;
+    margin-left: 20px;
+}
+
+#main {
+    padding: 20px 25px;
+}
+
+#reviews {
+    font-style: italic;
+}
+
+.card {
+    width: 90%;
+    margin-top: 30px;
+    padding-top: 30px;
+}
