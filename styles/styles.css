@@ -6,6 +6,7 @@
 
 #main {
     padding: 20px 25px;
+    height: auto;
 }
 
 #reviews {
@@ -31,4 +32,43 @@
     font-size: small;
     height: 40px;
     border-bottom: 1px solid lightgrey;
+}
+
+.alert {
+    margin-top: 32px;
+}
+
+label {
+    font-weight: 700;
+}
+
+#genderGroup {
+    position: relative;
+    left: 0;
+}
+
+#column2 {
+    height: 426px;
+}
+
+#buttonArea {
+    height: 50%;
+}
+
+#formInfo {
+    min-height: 100%;
+}
+
+#femaleGroup {
+    padding-right: 10px;
+}
+
+.form-check-label {
+    font-weight: 400;
+    padding-right: 15px;
+    margin-left: 12px;
+}
+
+.form-check-input {
+    margin-left: 5px;
 }

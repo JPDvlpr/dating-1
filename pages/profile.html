@@ -20,22 +20,20 @@
 
 <div class="container">
     <div class="card mx-auto" id="main">
-        <h2>Personal Information</h2>
+        <h2>Profile</h2>
         <hr>
         <div class="row h-100">
             <div class="col-md-8 justify-content-start" id="formInfo">
-                <form action="profile.html" method="post">
+                <form>
                     <div class="form-group">
-                        <label for="inputFirstName">First Name</label>
-                        <input type="text" class="form-control" id="inputFirstName" aria-describedby="firstName" placeholder="Enter First Name">
+                        <label for="inputEmail">Email</label>
+                        <input type="email" class="form-control" id="inputEmail" aria-describedby="email" placeholder="Enter Email">
                     </div>
                     <div class="form-group">
-                        <label for="inputLastName">Last Name</label>
-                        <input type="text" class="form-control" id="inputLastName" placeholder="Enter Last Name">
-                    </div>
-                    <div class="form-group">
-                        <label for="inputAge">Age</label>
-                        <input type="text" class="form-control" id="inputAge" placeholder="Enter Age">
+                        <label for="inputState">State</label>
+                        <select name="state" id="inputState">
+                            <option value="WASHINGTON">WASHINGTON</option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label>Gender</label>
