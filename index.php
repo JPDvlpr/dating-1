@@ -19,8 +19,20 @@ $f3->route('GET /', function() {
 );
 
 $f3->route('GET /myinfo', function() {
-    $view = new View;
-    echo $view->render('pages/personal-info.html');
+    $template = new Template();
+    echo $template->render('pages/personal-info.html');
+}
+);
+
+$f3->route('POST /profile', function() {
+    $template = new Template();
+    echo $template->render('pages/profile.html');
+}
+);
+
+$f3->route('POST /interests', function() {
+    $template = new Template();
+    echo $template->render('pages/interests.html');
 }
 );
 
