@@ -4,7 +4,7 @@
     <!--
     Zachary Rosenlund
     1/19/18
-    interests.html
+    interests.php
     The view for the index page of my dating site
     -->
     <meta charset="UTF-8">
@@ -23,7 +23,7 @@
         <div class="card-block">
             <h2>Interests</h2>
             <hr>
-            <form>
+            <form action="../dating/summary" method="post">
                 <div class="row h-100">
                     <div class="col-md-11 justify-content-start" id="formInfo">
                         <div class="form-group">
@@ -138,7 +138,7 @@
                         </div>
                     </div>
                     <div class="col-md-1">
-                        <div class="d-flex align-items-end justify-content-end w-100">
+                        <div class="d-flex align-items-end justify-content-end h-100 w-100">
                             <button class="btn btn-primary">Next ></button>
                         </div>
                     </div>

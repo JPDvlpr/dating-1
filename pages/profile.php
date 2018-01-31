@@ -4,7 +4,7 @@
     <!--
     Zachary Rosenlund
     1/19/18
-    personal-info.html
+    profile.php
     The view for the index page of my dating site
     -->
     <meta charset="UTF-8">
@@ -21,25 +21,23 @@
 <div class="container">
     <div class="card mx-auto" id="main">
         <div class="card-block">
-            <h2>Personal Information</h2>
+            <h2>Profile</h2>
             <hr>
-            <form action="../dating/profile" method="post">
+            <form action="../dating/interests" method="post">
                 <div class="row h-100">
-                    <div class="col-md-8 justify-content-start" id="formInfo">
+                    <div class="col-md-6 justify-content-start" id="formInfo">
                             <div class="form-group">
-                                <label for="inputFirstName">First Name</label>
-                                <input type="text" class="form-control" id="inputFirstName" aria-describedby="firstName" placeholder="Enter First Name">
+                                <label for="inputEmail">Email</label>
+                                <input type="email" class="form-control" id="inputEmail" aria-describedby="email" placeholder="Enter Email">
                             </div>
                             <div class="form-group">
-                                <label for="inputLastName">Last Name</label>
-                                <input type="text" class="form-control" id="inputLastName" placeholder="Enter Last Name">
+                                <label for="inputState">State</label>
+                                <select class="form-control" name="state" id="inputState">
+                                    <option value="WASHINGTON">WASHINGTON</option>
+                                </select>
                             </div>
                             <div class="form-group">
-                                <label for="inputAge">Age</label>
-                                <input type="text" class="form-control" id="inputAge" placeholder="Enter Age">
-                            </div>
-                            <div class="form-group">
-                                <label>Gender</label>
+                                <label>Seeking</label>
                                 <br>
                                 <div class="container" id="genderGroup">
                                     <div class="form-check form-check-inline">
@@ -52,17 +50,14 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label for="inputPhone">Phone Number</label>
-                                <input type="text" class="form-control" id="inputPhone" placeholder="Enter Phone Number">
-                            </div>
                     </div>
-                    <div class="col-md-4" id="column2">
-                        <div class="alert alert-secondary text-center" role="alert">
-                            <strong>Note: </strong>All information entered is protected by our <a href="">privacy policy</a>. Profile information can only be viewed by others with your permission.
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="inputBiography">Biography</label>
+                            <textarea class="form-control" id="inputBiography" rows="7"></textarea>
                         </div>
-                        <div class="d-flex align-items-end justify-content-end w-100" id="buttonArea">
-                            <button class="btn btn-primary" name="submit">Next ></button>
+                        <div class="d-flex align-items-end justify-content-end w-100">
+                            <button class="btn btn-primary">Next ></button>
                         </div>
                     </div>
                 </div>
