@@ -3,9 +3,9 @@
 <head>
     <!--
     Zachary Rosenlund
-    1/19/18
+    1/30/18
     profile.php
-    The view for the index page of my dating site
+    The view for the profile page of my dating site
     -->
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -23,16 +23,16 @@
         <div class="card-block">
             <h2>Profile</h2>
             <hr>
-            <form action="../dating/interests" method="post">
+            <form action="interests" method="post">
                 <div class="row h-100">
                     <div class="col-md-6 justify-content-start" id="formInfo">
                             <div class="form-group">
                                 <label for="inputEmail">Email</label>
-                                <input type="email" class="form-control" id="inputEmail" aria-describedby="email" placeholder="Enter Email">
+                                <input type="email" class="form-control" name="inputEmail" id="inputEmail" placeholder="Enter Email">
                             </div>
                             <div class="form-group">
                                 <label for="inputState">State</label>
-                                <select class="form-control" name="state" id="inputState">
+                                <select class="form-control" name="inputState" id="inputState">
                                     <option value="WASHINGTON">WASHINGTON</option>
                                 </select>
                             </div>
@@ -41,11 +41,11 @@
                                 <br>
                                 <div class="container" id="genderGroup">
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="gender" id="male" value="male">
+                                        <input class="form-check-input" type="radio" name="inputSeeking" id="male" value="Male">
                                         <label class="form-check-label" for="male">Male</label>
                                     </div>
                                     <div class="form-check form-check-inline" id="femaleGroup">
-                                        <input class="form-check-input" type="radio" name="gender" id="female" value="female">
+                                        <input class="form-check-input" type="radio" name="inputSeeking" id="female" value="Female">
                                         <label class="form-check-label" for="female">Female</label>
                                     </div>
                                 </div>
@@ -54,10 +54,10 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="inputBiography">Biography</label>
-                            <textarea class="form-control" id="inputBiography" rows="7"></textarea>
+                            <textarea class="form-control" name="inputBiography" id="inputBiography" rows="7"></textarea>
                         </div>
                         <div class="d-flex align-items-end justify-content-end w-100">
-                            <button class="btn btn-primary">Next ></button>
+                            <button class="btn btn-primary" name="submit" id="submit">Next ></button>
                         </div>
                     </div>
                 </div>
