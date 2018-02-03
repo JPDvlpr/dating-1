@@ -120,7 +120,7 @@ if (isset($_POST['submit'])) {
                                         </label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="inputIndoor[]" value="playing cards" id="playing cards">
+                                        <input class="form-check-input" type="checkbox" name="inputIndoor[]" value="playing cards" id="playing-cards">
                                         <label class="form-check-label" for="puzzles">
                                             playing cards
                                         </label>
@@ -128,13 +128,13 @@ if (isset($_POST['submit'])) {
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="inputIndoor[]" value="board games" id="board games">
+                                        <input class="form-check-input" type="checkbox" name="inputIndoor[]" value="board games" id="board-games">
                                         <label class="form-check-label" for="tv">
                                             board games
                                         </label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="inputIndoor[]" value="video games" id="video games">
+                                        <input class="form-check-input" type="checkbox" name="inputIndoor[]" value="video games" id="video-games">
                                         <label class="form-check-label" for="puzzles">
                                             video games
                                         </label>

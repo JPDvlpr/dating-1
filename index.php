@@ -49,7 +49,7 @@ $f3->route('GET|POST /myinfo', function($f3) {
 }
 );
 
-$f3->route('POST /profile', function($f3) {
+$f3->route('GET|POST /profile', function($f3) {
     if(isset($_POST['submit'])) {
         $firstName = $_POST['inputFirstName'];
         $lastName = $_POST['inputLastName'];
@@ -108,7 +108,7 @@ $f3->route('POST /profile', function($f3) {
 }
 );
 
-$f3->route('POST /interests', function() {
+$f3->route('GET|POST /interests', function() {
     $_SESSION['email'] = $_POST['inputEmail'];
     $_SESSION['state'] = $_POST['inputState'];
     $_SESSION['seeking'] = $_POST['inputSeeking'];
@@ -119,26 +119,25 @@ $f3->route('POST /interests', function() {
 }
 );
 
-$f3->route('POST /summary', function($f3) {
+$f3->route('GET|POST /summary', function($f3) {
     $indoorArray = $_POST['inputIndoor'];
     $outdoorArray = $_POST['inputOutdoor'];
 
     include('model/validation.php');
 
-    if(!validIndoor($indoorArray))
-    {
-        $errors['indoor'] = 'Please enter valid indoor items.';
-    }
+    if(!empty($indoorArray) && !empty($outdoorArray)) {
+        if (!validIndoor($indoorArray)) {
+            $errors['indoor'] = 'Please enter valid indoor items.';
+        }
 
-    if(!validOutdoor($outdoorArray))
-    {
-        $errors['phone'] = 'Please enter valid outdoor items';
-    }
+        if (!validOutdoor($outdoorArray)) {
+            $errors['phone'] = 'Please enter valid outdoor items';
+        }
 
-    if (sizeof($errors) > 0)
-    {
-        $_SESSION['errors'] = $errors;
-        header("location: interests");
+        if (sizeof($errors) > 0) {
+            $_SESSION['errors'] = $errors;
+            header("location: interests");
+        }
     }
 
     $f3->set("firstName", $_SESSION['firstName']);

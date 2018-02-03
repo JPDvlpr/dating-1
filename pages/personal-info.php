@@ -28,7 +28,7 @@
                     <div class="col-md-8 justify-content-start" id="formInfo">
                             <div class="form-group">
                                 <label for="inputFirstName">First Name</label>
-                                <input type="text" class="form-control" name="inputFirstName" id="inputFirstName" value="{{ @firstName }}" aria-describedby="firstName">
+                                <input type="text" class="form-control" name="inputFirstName" id="inputFirstName" value="{{ @firstName }}">
                                 <check if="{{ @errors['firstName']}}">
                                     <p class="error">{{ @errors['firstName']}}</p>
                                 </check>
