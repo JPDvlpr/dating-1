@@ -5,6 +5,11 @@ class PremiumMember extends Member
     private $_inDoorInterests;
     private $_outDoorInterests;
 
+    function __construct($fname, $lname, $age, $gender, $phone)
+    {
+        parent::__construct($fname, $lname, $age, $gender, $phone);
+    }
+
     /**
      * @return mixed
      */

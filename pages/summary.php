@@ -46,12 +46,12 @@
                             <tr>
                                 <td>Seeking: {{ @seeking }}</td>
                             </tr>
-                            <tr>
+                            <tr class="{{ @muteClass }}">
                                 <td>Interests: <repeat group="{{ @indoor }}" value="{{ @indoorItem }}">
                                         {{ trim(@indoorItem) }}
                                     </repeat> <repeat group="{{ @outdoor }}" value="{{ @outdoorItem }}">
                                         {{ trim(@outdoorItem) }}
-                                    </repeat>
+                                    </repeat>{{ @mute }}
                                 </td>
                             </tr>
                         </tbody>

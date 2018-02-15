@@ -70,7 +70,7 @@
                         </div>
                         <div class="form-check">
                             <label>Premium Membership</label><br>
-                            <input type="checkbox" class="form-check-input" name="inputPremium" id="inputPremium">
+                            <input type="checkbox" class="form-check-input" name="inputPremium" id="inputPremium" {{ @premium }}>
                             <label class="form-check-label" for="inputPremium">Sign me up for a Premium Account!</label>
                         </div>
                     </div>

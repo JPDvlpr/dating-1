@@ -23,7 +23,7 @@
         <div class="card-block">
             <h2>Profile</h2>
             <hr>
-            <form action="interests" method="post">
+            <form action="{{ @premiumPath }}" method="post">
                 <div class="row h-100">
                     <div class="col-md-6 justify-content-start" id="formInfo">
                             <div class="form-group">

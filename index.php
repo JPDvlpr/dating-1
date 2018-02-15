@@ -8,10 +8,10 @@
 ini_set("display_errors", 1);
 error_reporting(E_ALL);
 
-session_start();
-
 //Require the autoload file
 require_once('vendor/autoload.php');
+
+session_start();
 
 //Create an instance of the Base class
 $f3 = Base::instance();
@@ -39,6 +39,7 @@ $f3->route('GET|POST /myinfo', function($f3) {
         $f3->set('genderMale', $_SESSION['genderMale']);
         $f3->set('genderFemale', $_SESSION['genderFemale']);
         $f3->set('phone', $_SESSION['phone']);
+        $f3->set('premium', $_SESSION['premium']);
 
         $errors = $_SESSION['errors'];
         $f3->set('errors', $errors);
@@ -57,14 +58,17 @@ $f3->route('GET|POST /profile', function($f3) {
         if (isset($_POST['inputGender']) && $_POST['inputGender'] == "Male"){
             $genderMale = "checked";
             $genderFemale = "";
-        }
-        else if (isset($_POST['inputGender']) && $_POST['inputGender'] == "Female"){
+        } else if (isset($_POST['inputGender']) && $_POST['inputGender'] == "Female"){
             $genderFemale = "checked";
             $genderMale = "";
-        }
-        else{
+        } else{
             $genderFemale = "";
             $genderMale = "";
+        }
+        if (isset($_POST['inputPremium'])) {
+            $premium = "checked";
+        } else {
+            $premium = "";
         }
         $phone = $_POST['inputPhone'];
         $_SESSION['firstName'] = $firstName;
@@ -74,33 +78,39 @@ $f3->route('GET|POST /profile', function($f3) {
         $_SESSION['genderMale'] = $genderMale;
         $_SESSION['genderFemale'] = $genderFemale;
         $_SESSION['phone'] = $phone;
+        $_SESSION['premium'] = $premium;
 
         include('model/validation.php');
 
-        if(!validName($firstName))
-        {
+        if(!validName($firstName)) {
             $errors['firstName'] = 'Please enter a valid first name.';
         }
 
-        if(!validName($lastName))
-        {
+        if(!validName($lastName)) {
             $errors['lastName'] = 'Please enter a valid last name.';
         }
 
-        if(!validAge($age))
-        {
+        if(!validAge($age)) {
             $errors['age'] = 'Please enter a valid age.';
         }
 
-        if(!validPhone($phone))
-        {
+        if(!validPhone($phone)) {
             $errors['phone'] = 'Please enter a valid phone number (ex. 5555555555).';
         }
 
-        if (sizeof($errors) > 0)
-        {
+        if (sizeof($errors) > 0) {
             $_SESSION['errors'] = $errors;
             header("location: myinfo");
+        }
+
+        if (isset($_POST['inputPremium'])) {
+            $_SESSION['account'] = new PremiumMember($firstName, $lastName, $age, $_SESSION['gender'], $phone);
+            $f3->set('premiumPath', 'interests');
+            //print_r($_SESSION['account']);
+        } else {
+            $_SESSION['account'] = new Member($firstName, $lastName, $age, $_SESSION['gender'], $phone);
+            $f3->set('premiumPath', 'summary');
+            //print_r($_SESSION['account']);
         }
     }
 
@@ -114,33 +124,60 @@ $f3->route('GET|POST /interests', function() {
     $_SESSION['seeking'] = $_POST['inputSeeking'];
     $_SESSION['biography'] = $_POST['inputBiography'];
 
+    $_SESSION['account']->setEmail($_SESSION['email']);
+    $_SESSION['account']->setState($_SESSION['state']);
+    $_SESSION['account']->setSeeking($_SESSION['seeking']);
+    $_SESSION['account']->setBio($_SESSION['biography']);
+
     $template = new Template();
     echo $template->render('pages/interests.php');
 }
 );
 
 $f3->route('GET|POST /summary', function($f3) {
-    $indoorArray = $_POST['inputIndoor'];
-    $outdoorArray = $_POST['inputOutdoor'];
+    if ($_SESSION['premium'] == "checked") {
+        $indoorArray = $_POST['inputIndoor'];
+        $outdoorArray = $_POST['inputOutdoor'];
+        $_SESSION['mute'] = "";
 
-    include('model/validation.php');
+        include('model/validation.php');
 
-    if(!empty($indoorArray) && !empty($outdoorArray)) {
-        if (!validIndoor($indoorArray)) {
-            $errors['indoor'] = 'Please enter valid indoor items.';
+        if (!empty($indoorArray) && !empty($outdoorArray)) {
+            if (!validIndoor($indoorArray)) {
+                $errors['indoor'] = 'Please enter valid indoor items.';
+            }
+
+            if (!validOutdoor($outdoorArray)) {
+                $errors['phone'] = 'Please enter valid outdoor items';
+            }
+
+            if (sizeof($errors) > 0) {
+                $_SESSION['errors'] = $errors;
+                header("location: interests");
+            }
         }
 
-        if (!validOutdoor($outdoorArray)) {
-            $errors['phone'] = 'Please enter valid outdoor items';
-        }
+        $f3->set("indoor", $indoorArray);
+        $f3->set("outdoor", $outdoorArray);
+        $f3->set("muteClass", "");
 
-        if (sizeof($errors) > 0) {
-            $_SESSION['errors'] = $errors;
-            header("location: interests");
-        }
+        //print_r($_SESSION['account']);
+    } else{
+        $_SESSION['email'] = $_POST['inputEmail'];
+        $_SESSION['state'] = $_POST['inputState'];
+        $_SESSION['seeking'] = $_POST['inputSeeking'];
+        $_SESSION['biography'] = $_POST['inputBiography'];
+        $_SESSION['mute'] = "For Premium Members Only!";
+        $_SESSION['account']->setEmail($_SESSION['email']);
+        $_SESSION['account']->setState($_SESSION['state']);
+        $_SESSION['account']->setSeeking($_SESSION['seeking']);
+        $_SESSION['account']->setBio($_SESSION['biography']);
+        $f3->set("muteClass", "mute");
+
+        //print_r($_SESSION['account']);
     }
 
-    $f3->set("firstName", $_SESSION['firstName']);
+    $f3->set("firstName", $_SESSION['account']->getFname());
     $f3->set("lastName", $_SESSION['lastName']);
     $f3->set("age", $_SESSION['age']);
     $f3->set("gender", $_SESSION['gender']);
@@ -149,8 +186,7 @@ $f3->route('GET|POST /summary', function($f3) {
     $f3->set("state", $_SESSION['state']);
     $f3->set("seeking", $_SESSION['seeking']);
     $f3->set("biography", $_SESSION['biography']);
-    $f3->set("indoor", $indoorArray);
-    $f3->set("outdoor", $outdoorArray);
+    $f3->set("mute", $_SESSION['mute']);
 
     $template = new Template();
     echo $template->render('pages/summary.php');
