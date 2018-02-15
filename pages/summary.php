@@ -26,30 +26,30 @@
                     <table class="table table-bordered">
                         <tbody>
                             <tr>
-                                <td>Name: {{ @firstName }} {{ @lastName }}</td>
+                                <td>Name: {{ @SESSION['account']->getFname() }} {{ @SESSION['account']->getLname() }}</td>
                             </tr>
                             <tr>
-                                <td>Gender: {{ @gender }} </td>
+                                <td>Gender: {{ @SESSION['account']->getGender() }} </td>
                             </tr>
                             <tr>
-                                <td>Age: {{ @age }}</td>
+                                <td>Age: {{ @SESSION['account']->getAge() }}</td>
                             </tr>
                             <tr>
-                                <td>Phone: {{ @phone }}</td>
+                                <td>Phone: {{ @SESSION['account']->getPhone() }}</td>
                             </tr>
                             <tr>
-                                <td>Email: {{ @email }}</td>
+                                <td>Email: {{ @SESSION['account']->getEmail() }}</td>
                             </tr>
                             <tr>
-                                <td>State: {{ @state }}</td>
+                                <td>State: {{ @SESSION['account']->getState() }}</td>
                             </tr>
                             <tr>
-                                <td>Seeking: {{ @seeking }}</td>
+                                <td>Seeking: {{ @SESSION['account']->getSeeking() }}</td>
                             </tr>
                             <tr class="{{ @muteClass }}">
-                                <td>Interests: <repeat group="{{ @indoor }}" value="{{ @indoorItem }}">
+                                <td>Interests: <repeat group="{{ @SESSION['account']->getInDoorInterests() }}" value="{{ @indoorItem }}">
                                         {{ trim(@indoorItem) }}
-                                    </repeat> <repeat group="{{ @outdoor }}" value="{{ @outdoorItem }}">
+                                    </repeat> <repeat group="{{ @SESSION['account']->getOutDoorInterests() }}" value="{{ @outdoorItem }}">
                                         {{ trim(@outdoorItem) }}
                                     </repeat>{{ @mute }}
                                 </td>
@@ -62,7 +62,7 @@
                     <div class="container justify-content-center text-center">
                         <h3>Biography</h3>
                         <p>
-                            {{ @biography }}
+                            {{ @SESSION['account']->getBio() }}
                         </p>
                     </div>
                 </div>

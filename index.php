@@ -138,6 +138,8 @@ $f3->route('GET|POST /summary', function($f3) {
     if ($_SESSION['premium'] == "checked") {
         $indoorArray = $_POST['inputIndoor'];
         $outdoorArray = $_POST['inputOutdoor'];
+        $_SESSION['account']->setIndoorInterests($indoorArray);
+        $_SESSION['account']->setOutdoorInterests($outdoorArray);
         $_SESSION['mute'] = "";
 
         include('model/validation.php');
@@ -157,8 +159,8 @@ $f3->route('GET|POST /summary', function($f3) {
             }
         }
 
-        $f3->set("indoor", $indoorArray);
-        $f3->set("outdoor", $outdoorArray);
+//        $f3->set("indoor", $indoorArray);
+//        $f3->set("outdoor", $outdoorArray);
         $f3->set("muteClass", "");
 
         //print_r($_SESSION['account']);
@@ -177,15 +179,15 @@ $f3->route('GET|POST /summary', function($f3) {
         //print_r($_SESSION['account']);
     }
 
-    $f3->set("firstName", $_SESSION['account']->getFname());
-    $f3->set("lastName", $_SESSION['lastName']);
-    $f3->set("age", $_SESSION['age']);
-    $f3->set("gender", $_SESSION['gender']);
-    $f3->set("phone", $_SESSION['phone']);
-    $f3->set("email", $_SESSION['email']);
-    $f3->set("state", $_SESSION['state']);
-    $f3->set("seeking", $_SESSION['seeking']);
-    $f3->set("biography", $_SESSION['biography']);
+//    $f3->set("firstName", $_SESSION['account']->getFname());
+//    $f3->set("lastName", $_SESSION['lastName']);
+//    $f3->set("age", $_SESSION['age']);
+//    $f3->set("gender", $_SESSION['gender']);
+//    $f3->set("phone", $_SESSION['phone']);
+//    $f3->set("email", $_SESSION['email']);
+//    $f3->set("state", $_SESSION['state']);
+//    $f3->set("seeking", $_SESSION['seeking']);
+//    $f3->set("biography", $_SESSION['biography']);
     $f3->set("mute", $_SESSION['mute']);
 
     $template = new Template();
