@@ -1,0 +1,15 @@
+{
+  "name": "zrosenlu/dating",
+  "authors":[
+    {
+      "name":"Zachary Rosenlund",
+      "email":"zrosenlund@mail.greenriver.edu"
+    }
+  ],
+  "require": {
+    "bcosca/fatfree-core":"dev-master"
+  },
+  "autoload": {
+    "classmap": ["classes/"]
+  }
+}
