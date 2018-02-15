@@ -16,6 +16,10 @@
     text-align: left;
 }
 
+#buttonArea {
+    height: 55%;
+}
+
 .card {
     width: 90%;
     margin-top: 30px;
@@ -46,14 +50,6 @@ label {
 #genderGroup {
     position: relative;
     left: 0;
-}
-
-#column2 {
-    height: 426px;
-}
-
-#buttonArea {
-    height: 50%;
 }
 
 #formInfo {
