@@ -23,7 +23,7 @@
         <div class="card-block">
             <h2>Interests</h2>
             <hr>
-            <form action="summary" method="post">
+            <form action="summary" method="post" enctype="multipart/form-data">
                 <div class="row h-100">
                     <div class="col-md-11 justify-content-start" id="formInfo">
                         <div class="form-group">

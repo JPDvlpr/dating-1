@@ -31,6 +31,7 @@ $f3->route('GET /', function($f3) {
 }
 );
 
+//Define personal info route
 $f3->route('GET|POST /myinfo', function($f3) {
     if (isset($_SESSION['errors'])) {
         $f3->set('firstName', $_SESSION['firstName']);
@@ -50,6 +51,7 @@ $f3->route('GET|POST /myinfo', function($f3) {
 }
 );
 
+//Define profile route
 $f3->route('GET|POST /profile', function($f3) {
     if(isset($_POST['submit'])) {
         $firstName = $_POST['inputFirstName'];
@@ -118,6 +120,7 @@ $f3->route('GET|POST /profile', function($f3) {
 }
 );
 
+//Define interests route
 $f3->route('GET|POST /interests', function() {
     $_SESSION['email'] = $_POST['inputEmail'];
     $_SESSION['state'] = $_POST['inputState'];
@@ -134,6 +137,7 @@ $f3->route('GET|POST /interests', function() {
 }
 );
 
+//Define summary route
 $f3->route('GET|POST /summary', function($f3) {
     if ($_SESSION['premium'] == "checked") {
         $indoorArray = $_POST['inputIndoor'];
@@ -162,6 +166,7 @@ $f3->route('GET|POST /summary', function($f3) {
 //        $f3->set("indoor", $indoorArray);
 //        $f3->set("outdoor", $outdoorArray);
         $f3->set("muteClass", "");
+        $f3->set("premium", true);
 
         //print_r($_SESSION['account']);
     } else{
@@ -175,19 +180,10 @@ $f3->route('GET|POST /summary', function($f3) {
         $_SESSION['account']->setSeeking($_SESSION['seeking']);
         $_SESSION['account']->setBio($_SESSION['biography']);
         $f3->set("muteClass", "mute");
+        $f3->set("premium", false);
 
         //print_r($_SESSION['account']);
     }
-
-//    $f3->set("firstName", $_SESSION['account']->getFname());
-//    $f3->set("lastName", $_SESSION['lastName']);
-//    $f3->set("age", $_SESSION['age']);
-//    $f3->set("gender", $_SESSION['gender']);
-//    $f3->set("phone", $_SESSION['phone']);
-//    $f3->set("email", $_SESSION['email']);
-//    $f3->set("state", $_SESSION['state']);
-//    $f3->set("seeking", $_SESSION['seeking']);
-//    $f3->set("biography", $_SESSION['biography']);
     $f3->set("mute", $_SESSION['mute']);
 
     $template = new Template();

@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * Class Member
+ * This class creates a basic member account and contains all basic information
+ */
 class Member
 {
     protected $fname;
@@ -12,6 +16,14 @@ class Member
     protected $seeking;
     protected $bio;
 
+    /**
+     * Member constructor.
+     * @param $fname profile user's first name
+     * @param $lname profile user's last name
+     * @param $age profile user's age
+     * @param $gender profile user's gender
+     * @param $phone profile user's phone
+     */
     function __construct($fname, $lname, $age, $gender, $phone)
     {
         $this->fname = $fname;
@@ -22,7 +34,7 @@ class Member
     }
 
     /**
-     * @return mixed
+     * @return the first name of the user
      */
     public function getFname()
     {
@@ -38,7 +50,7 @@ class Member
     }
 
     /**
-     * @return mixed
+     * @return the last name of the user
      */
     public function getLname()
     {
@@ -54,7 +66,7 @@ class Member
     }
 
     /**
-     * @return mixed
+     * @return the age of the user
      */
     public function getAge()
     {
@@ -70,7 +82,7 @@ class Member
     }
 
     /**
-     * @return mixed
+     * @return the gender of the user
      */
     public function getGender()
     {
@@ -86,7 +98,7 @@ class Member
     }
 
     /**
-     * @return mixed
+     * @return the phone of the user
      */
     public function getPhone()
     {
@@ -102,7 +114,7 @@ class Member
     }
 
     /**
-     * @return mixed
+     * @return the email of the user
      */
     public function getEmail()
     {
@@ -118,7 +130,7 @@ class Member
     }
 
     /**
-     * @return mixed
+     * @return the state of the user
      */
     public function getState()
     {
@@ -134,7 +146,7 @@ class Member
     }
 
     /**
-     * @return mixed
+     * @return the seeking of the user
      */
     public function getSeeking()
     {
@@ -150,7 +162,7 @@ class Member
     }
 
     /**
-     * @return mixed
+     * @return the bio of the user
      */
     public function getBio()
     {

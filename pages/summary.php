@@ -47,11 +47,14 @@
                                 <td>Seeking: {{ @SESSION['account']->getSeeking() }}</td>
                             </tr>
                             <tr class="{{ @muteClass }}">
-                                <td>Interests: <repeat group="{{ @SESSION['account']->getInDoorInterests() }}" value="{{ @indoorItem }}">
+                                <td>Interests:
+                                    <check if="{{ @premium == true }}">
+                                    <repeat group="{{ @SESSION['account']->getInDoorInterests() }}" value="{{ @indoorItem }}">
                                         {{ trim(@indoorItem) }}
                                     </repeat> <repeat group="{{ @SESSION['account']->getOutDoorInterests() }}" value="{{ @outdoorItem }}">
                                         {{ trim(@outdoorItem) }}
-                                    </repeat>{{ @mute }}
+                                    </repeat></check>
+                                    {{ @mute }}
                                 </td>
                             </tr>
                         </tbody>
