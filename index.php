@@ -57,6 +57,7 @@ $f3->route('GET|POST /profile', function($f3) {
         $firstName = $_POST['inputFirstName'];
         $lastName = $_POST['inputLastName'];
         $age = $_POST['inputAge'];
+        $gender = $_POST['inputGender'];
         if (isset($_POST['inputGender']) && $_POST['inputGender'] == "Male"){
             $genderMale = "checked";
             $genderFemale = "";
@@ -73,16 +74,17 @@ $f3->route('GET|POST /profile', function($f3) {
             $premium = "";
         }
         $phone = $_POST['inputPhone'];
+
+        //put these variables in sessions for checkbox stickiness
         $_SESSION['firstName'] = $firstName;
         $_SESSION['lastName'] = $lastName;
         $_SESSION['age'] = $age;
-        $_SESSION['gender'] = $_POST['inputGender'];
         $_SESSION['genderMale'] = $genderMale;
         $_SESSION['genderFemale'] = $genderFemale;
         $_SESSION['phone'] = $phone;
         $_SESSION['premium'] = $premium;
 
-        include('model/validation.php');
+        require_once('model/validation.php');
 
         if(!validName($firstName)) {
             $errors['firstName'] = 'Please enter a valid first name.';
@@ -106,11 +108,11 @@ $f3->route('GET|POST /profile', function($f3) {
         }
 
         if (isset($_POST['inputPremium'])) {
-            $_SESSION['account'] = new PremiumMember($firstName, $lastName, $age, $_SESSION['gender'], $phone);
+            $_SESSION['account'] = new PremiumMember($firstName, $lastName, $age, $gender, $phone);
             $f3->set('premiumPath', 'interests');
             //print_r($_SESSION['account']);
         } else {
-            $_SESSION['account'] = new Member($firstName, $lastName, $age, $_SESSION['gender'], $phone);
+            $_SESSION['account'] = new Member($firstName, $lastName, $age, $gender, $phone);
             $f3->set('premiumPath', 'summary');
             //print_r($_SESSION['account']);
         }
@@ -122,15 +124,10 @@ $f3->route('GET|POST /profile', function($f3) {
 
 //Define interests route
 $f3->route('GET|POST /interests', function() {
-    $_SESSION['email'] = $_POST['inputEmail'];
-    $_SESSION['state'] = $_POST['inputState'];
-    $_SESSION['seeking'] = $_POST['inputSeeking'];
-    $_SESSION['biography'] = $_POST['inputBiography'];
-
-    $_SESSION['account']->setEmail($_SESSION['email']);
-    $_SESSION['account']->setState($_SESSION['state']);
-    $_SESSION['account']->setSeeking($_SESSION['seeking']);
-    $_SESSION['account']->setBio($_SESSION['biography']);
+    $_SESSION['account']->setEmail($_POST['inputEmail']);
+    $_SESSION['account']->setState($_POST['inputState']);
+    $_SESSION['account']->setSeeking($_POST['inputSeeking']);
+    $_SESSION['account']->setBio($_POST['inputBiography']);
 
     $template = new Template();
     echo $template->render('pages/interests.php');
@@ -146,7 +143,7 @@ $f3->route('GET|POST /summary', function($f3) {
         $_SESSION['account']->setOutdoorInterests($outdoorArray);
         $_SESSION['mute'] = "";
 
-        include('model/validation.php');
+        require_once('model/validation.php');
 
         if (!empty($indoorArray) && !empty($outdoorArray)) {
             if (!validIndoor($indoorArray)) {
@@ -170,15 +167,11 @@ $f3->route('GET|POST /summary', function($f3) {
 
         //print_r($_SESSION['account']);
     } else{
-        $_SESSION['email'] = $_POST['inputEmail'];
-        $_SESSION['state'] = $_POST['inputState'];
-        $_SESSION['seeking'] = $_POST['inputSeeking'];
-        $_SESSION['biography'] = $_POST['inputBiography'];
         $_SESSION['mute'] = "For Premium Members Only!";
-        $_SESSION['account']->setEmail($_SESSION['email']);
-        $_SESSION['account']->setState($_SESSION['state']);
-        $_SESSION['account']->setSeeking($_SESSION['seeking']);
-        $_SESSION['account']->setBio($_SESSION['biography']);
+        $_SESSION['account']->setEmail($_POST['inputEmail']);
+        $_SESSION['account']->setState($_POST['inputState']);
+        $_SESSION['account']->setSeeking($_POST['inputSeeking']);
+        $_SESSION['account']->setBio($_POST['inputBiography']);
         $f3->set("muteClass", "mute");
         $f3->set("premium", false);
 
