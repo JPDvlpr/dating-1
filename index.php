@@ -10,8 +10,13 @@ error_reporting(E_ALL);
 
 //Require the autoload file
 require_once('vendor/autoload.php');
+require("/home/zrosenlu/config.php");
+require_once("model/dbFunctions.php");
 
 session_start();
+
+//Connect to database
+$dbh = connect();
 
 //Create an instance of the Base class
 $f3 = Base::instance();
@@ -136,6 +141,8 @@ $f3->route('GET|POST /interests', function() {
 
 //Define summary route
 $f3->route('GET|POST /summary', function($f3) {
+
+
     if ($_SESSION['premium'] == "checked") {
         $indoorArray = $_POST['inputIndoor'];
         $outdoorArray = $_POST['inputOutdoor'];
@@ -160,8 +167,26 @@ $f3->route('GET|POST /summary', function($f3) {
             }
         }
 
-//        $f3->set("indoor", $indoorArray);
-//        $f3->set("outdoor", $outdoorArray);
+        if ($_SESSION['account']->getGender() === "Male") {
+            $gender = 'M';
+        } else {
+            $gender = 'F';
+        }
+
+        $fname = $_SESSION['account']->getFname();
+        $lname = $_SESSION['account']->getLname();
+        $age = $_SESSION['account']->getAge();
+        $phone = $_SESSION['account']->getPhone();
+        $email = $_SESSION['account']->getEmail();
+        $state = $_SESSION['account']->getState();
+        $seeking = $_SESSION['account']->getSeeking();
+        $bio = $_SESSION['account']->getBio();
+        $premium = "yes";
+        $image = $_SESSION['account']->getImagePath();
+        $interests = implode(", ", $_SESSION['account']->getInDoorInterests()) . ", " . implode(", ", $_SESSION['account']->getOutDoorInterests());
+
+        $result = insertMember($fname, $lname, $age, $gender, $phone, $email, $state, $seeking, $bio, $premium, $image, $interests);
+
         $f3->set("muteClass", "");
         $f3->set("premium", true);
 
@@ -175,6 +200,26 @@ $f3->route('GET|POST /summary', function($f3) {
         $f3->set("muteClass", "mute");
         $f3->set("premium", false);
 
+        if ($_SESSION['account']->getGender() === "Male") {
+            $gender = 'M';
+        } else {
+            $gender = 'F';
+        }
+
+        $fname = $_SESSION['account']->getFname();
+        $lname = $_SESSION['account']->getLname();
+        $age = $_SESSION['account']->getAge();
+        $phone = $_SESSION['account']->getPhone();
+        $email = $_SESSION['account']->getEmail();
+        $state = $_SESSION['account']->getState();
+        $seeking = $_SESSION['account']->getSeeking();
+        $bio = $_SESSION['account']->getBio();
+        $premium = "no";
+        $image = null;
+        $interests = null;
+
+        $result = insertMember($fname, $lname, $age, $gender, $phone, $email, $state, $seeking, $bio, $premium, $image, $interests);
+
         //print_r($_SESSION['account']);
     }
     $f3->set("mute", $_SESSION['mute']);
@@ -183,6 +228,14 @@ $f3->route('GET|POST /summary', function($f3) {
     echo $template->render('pages/summary.php');
 }
 );
+
+$f3->route("GET /admin", function($f3) {
+
+    $f3->set("tableData", getMembers());
+
+    $template = new Template();
+    echo $template->render('pages/admin.php');
+});
 
 //Run fat free
 $f3->run();
